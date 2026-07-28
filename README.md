@@ -32,7 +32,8 @@ primary team playing → priority; secondary team playing → secondary; else fo
 
 1. **Token** — free account at [football-data.org](https://www.football-data.org/client/register),
    then add the token as an Actions secret: repo → Settings → Secrets and
-   variables → Actions → New repository secret → name `FOOTBALL_DATA_TOKEN`.
+   variables → Actions → New repository secret → name `FBD_TOKEN` (the
+   workflow maps it to the `FOOTBALL_DATA_TOKEN` env var).
 2. **Pages** — repo → Settings → Pages → Deploy from a branch → `main` / `/docs`.
 3. **Verify team IDs** (once): `FOOTBALL_DATA_TOKEN=... python src/verify_ids.py`
 4. **First build** — Actions tab → *build feeds* → Run workflow. Confirm the
