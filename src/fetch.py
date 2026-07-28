@@ -43,6 +43,9 @@ def fetch_all(token, session=None):
     """Fetch every configured competition and keep only calendar-worthy matches."""
     matches = []
     for code in config.COMPETITIONS:
-        matches.extend(fetch_competition_matches(code, token, session=session))
+        fetched = fetch_competition_matches(code, token, session=session)
+        kept = [m for m in fetched if m["status"] in config.INCLUDE_STATUSES]
+        print(f"{code}: {len(fetched)} fetched, {len(kept)} upcoming")
+        matches.extend(kept)
         time.sleep(1)  # 3 calls/run sits far under the 10 req/min cap; pause is just politeness
-    return [m for m in matches if m["status"] in config.INCLUDE_STATUSES]
+    return matches
